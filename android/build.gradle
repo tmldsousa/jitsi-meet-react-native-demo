@@ -34,5 +34,10 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://www.jitpack.io' }
+        
+        // Jitsi Meet SDK
+        maven {
+            url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+        }
     }
 }

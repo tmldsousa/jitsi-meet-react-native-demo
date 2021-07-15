@@ -79,8 +79,9 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
+    entryFile: "index.js",
+    bundleAssetName: "app.bundle",
 ]
-
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -209,6 +210,22 @@ dependencies {
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
         implementation jscFlavor
+    }
+
+    implementation ('org.jitsi.react:jitsi-meet-sdk:3.+') {
+        transitive = true
+        // Un-comment below if using hermes
+        //exclude group: 'com.facebook', module:'hermes'
+        // Un-comment any packages below that you have added to your project to prevent `duplicate_classes` errors
+        //exclude group: 'com.facebook.react', module:'react-native-locale-detector'
+        //exclude group: 'com.facebook.react', module:'react-native-vector-icons'
+        //exclude group: 'com.facebook.react', module:'react-native-community-async-storage'
+        //exclude group: 'com.facebook.react', module:'react-native-community_netinfo'
+        //exclude group: 'com.facebook.react', module:'react-native-svg'
+        //exclude group: 'com.facebook.react', module:'react-native-fetch-blob'
+        //exclude group: 'com.facebook.react', module:'react-native-webview'
+        //exclude group: 'com.facebook.react', module:'react-native-linear-gradient'
+        //exclude group: 'com.facebook.react', module:'react-native-sound'
     }
 }
 

@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'JitsiMeetReactNativeApp' do
   config = use_native_modules!
@@ -23,7 +23,17 @@ target 'JitsiMeetReactNativeApp' do
   # you should disable the next line.
   use_flipper!()
 
+  # Jitsi Meet SDK
+  pod 'JitsiMeetSDK'
+
   post_install do |installer|
     react_native_post_install(installer)
+
+    # Jitsi Meet SDK - Disable Bitcode (https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-ios-sdk#using-cocoapods)
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
+      end
+    end
   end
 end
